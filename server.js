@@ -17,6 +17,9 @@ app.use(express.urlencoded({ extended: false })); // expect user input data from
 app.use(methodOverride(`_method`)) // to make DELETE, PUT requests work
 // app.use(morgan(`dev`)) // for HTML request info in the console
 
+const path = require('path'); // Set up public folder
+app.use(express.static(path.join(__dirname, 'public'))); // Set up public folder
+
 // Schema
 const ScatterData = require(`./models/datapoints.js`) // use this MongoDB schema
 

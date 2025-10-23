@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scatter plot</title>
+    <!-- <script defer src="./visualization.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script> -->
+    <link rel="stylesheet" href="./css/style.css">
+
 </head>
 <body>
     <h1>Scatter plot</h1>
     <a href="/scatterplot/new">Add new data point</a>
+    <div id="scatter-plot-visualization">test</div> <!-- D3 SVG container -->
     <ul>
         <% for (const [index, dataPoint] of dataPoints.entries()) { %>
             <li> 

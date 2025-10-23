@@ -1,0 +1,11 @@
+/* 1. CHART DISPLAY */
+
+#scatter-plot-visualization {
+  width: 50vw;
+  height: 10px;
+  border: 1px solid red;
+}
+
+svg {
+    overflow: visible;
+}
