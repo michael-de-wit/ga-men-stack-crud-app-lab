@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit data point</title>
+</head>
+<body>
+    <h1>Update data point (<%= dataPoint.xPos %>,<%= dataPoint.yPos %>)</h1>
+    <form action="/scatterplot/<%= dataPoint._id %>?_method=PUT" method="POST">
+        <label>X-position (0-100):</label>
+        <input name="xPos" type="number" min="0" max="100" value="<%= dataPoint.xPos %>"/>
+        <label>Y-position (0-100):</label>
+        <input name="yPos" type="number" min="0" max="100" value="<%= dataPoint.yPos %>"/>
+        <button type="submit">Update data point</button>
+    </form>
+    <a href="/scatterplot">Back to scatter plot</a>
+</body>
+</html>

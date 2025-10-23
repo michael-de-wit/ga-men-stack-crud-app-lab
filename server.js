@@ -27,7 +27,6 @@ app.get (`/`, async (req, res) => { // GET request for the index route
 
 app.get(`/scatterplot`, async (req,res) => { // GET request for index route all fruit documents / records (i.e. not a post request)
     const allData = await ScatterData.find()
-    console.log(allData);
     res.render(`scatterdata/index.ejs`, {
         dataPoints: allData,
     })
@@ -38,11 +37,28 @@ app.get(`/scatterplot/new`, async (req, res) => {
 })
 
 app.post(`/scatterplot`, async (req, res) => { // POST request to the fruits new route (i.e. not a get request)
-    console.log(req.body);
     await ScatterData.create(req.body)
     
     res.redirect(`/scatterplot`) // redirect to the GET fruits index route after the post fruits processing has run
     
+})
+
+app.get(`/scatterplot/:dataPointId/edit`, async (req, res) => {
+    const foundDataPoint = await ScatterData.findById(req.params.dataPointId)
+    res.render(`scatterdata/edit.ejs`, {
+        dataPoint: foundDataPoint,
+    })
+})
+
+app.put(`/scatterplot/:dataPointId`, async (req, res) => { // need a form for a put request
+    await ScatterData.findByIdAndUpdate(req.params.dataPointId, req.body)
+    res.redirect(`/scatterplot`)
+})
+
+app.delete(`/scatterplot/:dataPointId`, async (req, res) => { // DELETE request
+    await ScatterData.findByIdAndDelete(req.params.dataPointId)
+    res.redirect(`/scatterplot`)
+
 })
 
 app.get(`/scatterplot/:dataPointId`, async (req, res) => { // GET request for show route
