@@ -45,6 +45,13 @@ app.post(`/scatterplot`, async (req, res) => { // POST request to the fruits new
     
 })
 
+app.get(`/scatterplot/:dataPointId`, async (req, res) => { // GET request for show route
+    const foundDataPoint = await ScatterData.findById(req.params.dataPointId)
+    res.render(`scatterdata/show.ejs` , {
+        dataPoint: foundDataPoint
+    })
+})
+
 // Listening
 const portNumber = 3003
 app.listen(portNumber, () => {

@@ -11,7 +11,7 @@
     <ul>
         <% for (const [index, dataPoint] of dataPoints.entries()) { %>
             <li> 
-                <a href="/scatterplot/<%= dataPoints._id %>">
+                <a href="/scatterplot/<%= dataPoint._id %>">
                     (<%= dataPoint.xPos %>, <%= dataPoint.yPos %>) 
                 </a>
             </li>
