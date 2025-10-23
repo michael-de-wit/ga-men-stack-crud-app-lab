@@ -4,23 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scatter plot</title>
-    <!-- <script defer src="./visualization.js"></script>
-    <script src="https://d3js.org/d3.v7.min.js"></script> -->
+    <script defer src="./visualization.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
     <link rel="stylesheet" href="./css/style.css">
 
 </head>
 <body>
     <h1>Scatter plot</h1>
     <a href="/scatterplot/new">Add new data point</a>
-    <div id="scatter-plot-visualization">test</div> <!-- D3 SVG container -->
-    <ul>
-        <% for (const [index, dataPoint] of dataPoints.entries()) { %>
-            <li> 
-                <a href="/scatterplot/<%= dataPoint._id %>">
-                    (<%= dataPoint.xPos %>, <%= dataPoint.yPos %>) 
-                </a>
-            </li>
-        <% } %>
-    </ul>
+    <div id="scatter-plot-visualization"></div> <!-- D3 SVG container -->
+    <div>
+        <ul>
+            <% for (const [index, dataPoint] of dataPoints.entries()) { %>
+                <li> 
+                    <a href="/scatterplot/<%= dataPoint._id %>">
+                        (<%= dataPoint.xPos %>, <%= dataPoint.yPos %>) 
+                    </a>
+                </li>
+            <% } %>
+        </ul>
+    </div>
 </body>
 </html>
+
+<div id="dataArray">
+    <p> [
+    <% for (const [index, dataPoint] of dataPoints.entries()) { %>
+        <% if(index + 1 != dataPoints.length) { %>
+           {"xPos": <%= dataPoint.xPos %>, "yPos": <%= dataPoint.yPos %>},
+        <% } else { %>
+           {"xPos": <%= dataPoint.xPos %>, "yPos": <%= dataPoint.yPos %>}
+        <% } %>
+    <% } %>
+        ]
+    </p>
+</div>

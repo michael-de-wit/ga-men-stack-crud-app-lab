@@ -2,8 +2,7 @@
 
 #scatter-plot-visualization {
   width: 50vw;
-  height: 10px;
-  border: 1px solid red;
+  height: auto;
 }
 
 svg {
