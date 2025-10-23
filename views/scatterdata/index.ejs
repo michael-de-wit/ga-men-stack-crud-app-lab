@@ -27,12 +27,13 @@
 </body>
 </html>
 
+<!-- Convert dataPoints into a format that can be parsed as JSON into an array of objects which is what D3 expects as its .data format -->
 <div id="dataArray">
     <p> [
-    <% for (const [index, dataPoint] of dataPoints.entries()) { %>
-        <% if(index + 1 != dataPoints.length) { %>
+    <% for (const [index, dataPoint] of dataPoints.entries()) { %> <!-- Loop through dataPoints to clean up the object format -->
+        <% if(index + 1 != dataPoints.length) { %> <!-- Add a comma after each object unless it's the last object -->
            {"xPos": <%= dataPoint.xPos %>, "yPos": <%= dataPoint.yPos %>},
-        <% } else { %>
+        <% } else { %> <!-- This should only apply to the last object -- excludes the comma afterwards -->
            {"xPos": <%= dataPoint.xPos %>, "yPos": <%= dataPoint.yPos %>}
         <% } %>
     <% } %>

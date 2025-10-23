@@ -1,39 +1,8 @@
-// Packages, connections
-// const dotenv = require('dotenv'); // in order to use .env
-// dotenv.config() // in order to use .env
+const dataArrayAsString = document.getElementById('dataArray').innerText; // Get the semi-cleaned data in string format, structured as an array of objects, so it can be parsed
 
-// const { default: mongoose } = require('mongoose'); // in order to use mongoose to connect with MongoDB
-// mongoose.connect(process.env.MONGODB_URI) // connect to MongoDBusing the info in .env
-// mongoose.connection.on(`connected`, () => { // connect to MongoDB
-//     console.log(`Connected to MongoDB ${mongoose.connection.name}`);
-// })
+const dataObjectArray = JSON.parse(dataArrayAsString) // parse the string-format array of objects into an array data type
 
-// const path = require('path'); // Set up public folder
-// app.use(express.static(path.join(__dirname, 'public'))); // Set up public folder
-
-// // Schema
-// const ScatterData = require(`./models/datapoints.js`) // use this MongoDB schema
-
-// async function getScatterData() {
-//   try {
-//     const allData = await ScatterData.find();
-//     return allData;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
-// console.log(allData);
-
-// set the dimensions and margins of the graph
-
-const dataArrayAsString = document.getElementById('dataArray').innerText;
-
-const dataObjectArray = JSON.parse(dataArrayAsString)
-
-console.log(dataObjectArray);
-
-
+// Template from https://d3-graph-gallery.com/graph/scatter_basic.html
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
 width = 460 - margin.left - margin.right,
 height = 400 - margin.top - margin.bottom;
@@ -46,11 +15,6 @@ var svg = d3.select("#scatter-plot-visualization")
   .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
-
-
-
-//Read the data
-// d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", function(data) {
 
   // Add X axis
   var x = d3.scaleLinear()
@@ -75,7 +39,7 @@ var svg = d3.select("#scatter-plot-visualization")
     .append("circle")
       .attr("cx", function (d) { return x(d.xPos); } )
       .attr("cy", function (d) { return y(d.yPos); } )
-      .attr("r", 1.5)
+      .attr("r", 10)
       .style("fill", "#69b3a2")
 
 // })
