@@ -1,45 +1,43 @@
-const dataArrayAsString = document.getElementById('dataArray').innerText; // Get the semi-cleaned data in string format, structured as an array of objects, so it can be parsed
+const dataArrayAsString = document.getElementById('dataArray').innerText;
+const dataObjectArray = JSON.parse(dataArrayAsString);
 
-const dataObjectArray = JSON.parse(dataArrayAsString) // parse the string-format array of objects into an array data type
+// Set up dimensions
+const margin = { top: 10, right: 30, bottom: 30, left: 60 };
+const width = 460 - margin.left - margin.right;
+const height = 400 - margin.top - margin.bottom;
 
-// Template from https://d3-graph-gallery.com/graph/scatter_basic.html
-var margin = {top: 10, right: 30, bottom: 30, left: 60},
-width = 460 - margin.left - margin.right,
-height = 400 - margin.top - margin.bottom;
-
-// append the svg object to the body of the page
-var svg = d3.select("#scatter-plot-visualization")
+// Create SVG container
+const svg = d3.select("#scatter-plot-visualization")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", `translate(${margin.left},${margin.top})`);
 
-  // Add X axis
-  var x = d3.scaleLinear()
-    .domain([0, 100])
-    .range([ 0, width ]);
-  svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x));
+// Create scales
+const x = d3.scaleLinear()
+  .domain([0, 100])
+  .range([0, width]);
 
-  // Add Y axis
-  var y = d3.scaleLinear()
-    .domain([0, 100])
-    .range([ height, 0]);
-  svg.append("g")
-    .call(d3.axisLeft(y));
+const y = d3.scaleLinear()
+  .domain([0, 100])
+  .range([height, 0]);
 
-  // Add dots
-  svg.append('g')
-    .selectAll("dot")
-    .data(dataObjectArray)
-    .enter()
-    .append("circle")
-      .attr("cx", function (d) { return x(d.xPos); } )
-      .attr("cy", function (d) { return y(d.yPos); } )
-      .attr("r", 10)
-      .style("fill", "#69b3a2")
+// Add X axis
+svg.append("g")
+  .attr("transform", `translate(0,${height})`)
+  .call(d3.axisBottom(x));
 
-// })
+// Add Y axis
+svg.append("g")
+  .call(d3.axisLeft(y));
+
+// Add dots using modern join pattern
+svg.append("g")
+  .selectAll("circle")
+  .data(dataObjectArray)
+  .join("circle")
+    .attr("cx", d => x(d.xPos))
+    .attr("cy", d => y(d.yPos))
+    .attr("r", 10)
+    .attr("fill", "#69b3a2");
